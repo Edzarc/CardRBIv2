@@ -1,9 +1,9 @@
 <?php
 // database.php
-$host = "ulookpdesktop";
-$dbname = "rbi_microfinancedb";
-$username = "edzArc";   
-$password = "admin";      
+$host = "localhost:3307";
+$dbname = "rbidbtest";
+$username = "root";   
+$password = "";
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);

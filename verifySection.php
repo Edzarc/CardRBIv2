@@ -1,6 +1,11 @@
 <?php
     session_start();
     include("header.php");
+    
+    if (!isset($_SESSION['first_name'])) {
+        header("Location: index.php");
+        exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -3,13 +3,16 @@
     include("header.php");
     require("PHP/database.php");
 
-    if ($_SESSION['role'] != 'admin'){ header("Location: index.php");}
+    if (!isset($_SESSION['first_name']) || $_SESSION['role'] != "admin") {
+        header("Location: index.php");
+        exit;
+    }
 
     $stmt = $pdo->prepare("SELECT * FROM users ORDER BY created_at DESC");
     $stmt->execute();
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -23,6 +26,14 @@
     <link rel="stylesheet" href="styles/adminStyle.css">
 </head>
 <body>
+    <div class="adminPages">
+        <ul>
+            <li><a href="accountRegister.php">Register account</a></li>
+            <li><a href="">System Overview</a></li>
+            <li><a href="">...</a></li>
+            <li><a href="">...</a></li>
+        </ul>
+    </div>
     <div class="forTable">
         <p>Recently Logged Members</p>
     </div>
@@ -46,7 +57,5 @@
         </tr>
         <?php endforeach;?>
     </table>
-
-    
 </body>
 </html>

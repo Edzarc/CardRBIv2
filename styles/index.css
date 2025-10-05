@@ -157,6 +157,77 @@ footer {
     color: #fff;
 }
 
+
+/*FOR table*/
+table {
+  width: 100%;
+  border-collapse: collapse; /* Remove spacing between cells */
+  font-family: Arial, sans-serif;
+}
+
+/* Style table headers */
+th {
+  background-color: #006699;
+  padding: 12px;
+  border: 1px solid #000000;
+  text-align: left;
+  color: #ddd;
+}   
+
+/* Style table cells */
+td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+/* Add hover effect for rows */
+tr:hover {
+  background-color:#ecebeb;
+}
+
+.loan_historytb{
+    background: #fff; 
+    padding: 20px; 
+    border-radius: 10px; 
+    margin-top: 5px;
+    margin-bottom: 20px; 
+    margin-left: 20px;
+    margin-right: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
+    
+    /*
+    table { width: 100%; border-collapse: collapse; }
+    table th, table td { text-align: left; padding: 10px; border-bottom: 1px solid #e5e7eb; }
+    .status-paid { color: #16a34a; font-weight: 600; }
+    */
+}
+
+.loan_historytb h3 { 
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 600; 
+    color: #000000;
+}
+
+.loan_historytb th {
+    background-color: #fff;    
+    padding: 12px;
+    text-align: left;
+    color: #000000;
+    border-color: #fff;
+}
+.loan_historytb table {
+  width: 100%;
+  border-collapse: collapse; /* Remove spacing between cells */
+  font-family: Arial, sans-serif;
+}   
+.loan_historytb th, .loan_historytb td { 
+    text-align: left; 
+    padding: 10px; 
+    border-bottom: 1px solid #e5e7eb; 
+}
+
+
 @media (max-width: 900px) {
     .features {
         flex-direction: column;

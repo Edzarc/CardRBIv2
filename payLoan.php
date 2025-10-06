@@ -2,6 +2,10 @@
     session_start();
     include("header.php");
     require("PHP/database.php");
+    if (!isset($_SESSION['id']) || $_SESSION['role'] != "admin") {
+        header("Location: index.php");
+        exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

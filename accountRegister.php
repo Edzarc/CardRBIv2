@@ -2,11 +2,28 @@
 session_start();
 include("header.php");
 require("PHP/database.php");
-if (!isset($_SESSION['first_name']) || $_SESSION['role'] != "admin") {
+if (!isset($_SESSION['id']) || $_SESSION['role'] != "admin") {
     header("Location: index.php");
     exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {//SANITIZE THIS!!!!!!!!!!!!!!!!!!
+    $firstName = trim($_POST['first_name']);
+    $lastName = trim($_POST['last_name']);
+    $email = trim($_POST['email']);
+    $role = $_POST['role'];
+    $password = $_POST['password'];
+
+
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+    try {
+        $stmt = $pdo->prepare("INSERT INTO users (first_name, last_name, password_hash, role, email) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$firstName, $lastName, $hash, $role, $email]);
+        $msg = "User ($role) created successfully.";
+    } catch (PDOException $e) {
+        $msg = "Error: " . $e->getMessage();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +32,7 @@ if (!isset($_SESSION['first_name']) || $_SESSION['role'] != "admin") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CARD RBI - Sign Up</title>
+    <title>CARD RBI</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
@@ -23,29 +40,12 @@ if (!isset($_SESSION['first_name']) || $_SESSION['role'] != "admin") {
     <!-- Reuse account.css (same as login page) -->
     <link rel="stylesheet" href="styles/accountRegister.css">
 </head>
-
 <body>
+    
+    <form method="POST" action= <?php $_SERVER['PHP_SELF']?>>
 
-    <form method="post">
-        <h2 style="text-align:center; color:#111;">Add Staff/Manager</h2>
-        <?php if (!empty($msg)) echo "<p style='color:green; text-align:center;'>$msg</p>"; ?>
-        <label>Username</label>
-        <input type="text" name="username" required>
-        <label>Full Name</label>
-        <input type="text" name="full_name">
-        <label>Email</label>
-        <input type="email" name="email">
-        <label>Role</label>
-        <select name="role">
-            <option value="staff">Staff</option>
-            <option value="manager">Manager</option>
-        </select>
-        <label>Password</label>
-        <input type="password" name="password" required>
-        <button type="submit" class="btn">Create</button>
-    </form>
+        <h1>Create Staff Account</h1>
 
-    <form method="POST" action="PHP/signup.php">
         <!-- First Name -->
         <div class="form-group">
             <label for="first_name">First Name</label>
@@ -55,7 +55,6 @@ if (!isset($_SESSION['first_name']) || $_SESSION['role'] != "admin") {
         </div>
 
         <!-- Last Name -->
-
         <div class="form-group">
             <label for="last_name">Last Name</label>
             <div class="input-wrapper">
@@ -78,7 +77,7 @@ if (!isset($_SESSION['first_name']) || $_SESSION['role'] != "admin") {
                 <input type="password" id="password" name="password" required>
                 <i class="fas fa-eye-slash icon password-toggle" id="togglePasswordIcon" style="cursor:pointer;"></i>
             </div>
-            <small>Use 8 or more characters.</small>
+            <!-- <small>Use 8 or more characters.</small> -->
         </div>
 
 
@@ -93,14 +92,37 @@ if (!isset($_SESSION['first_name']) || $_SESSION['role'] != "admin") {
             </div>
         </div>
 
-        <div class="form-group">
+        <!-- 
+        <div class="form-group"> 
             <label for="branch">Branch</label>
             <div class="input-wrapper">
                 <input type="text" id="branch" name="branch" required>
             </div>
         </div>
+        -->
+        <?php
+            if(isset($msg)){
+                echo $msg;
+            }
+        ?>
+        <button type="submit" name="signup" class="btn-primary">Sign Up</button>
     </form>
+    
+    <script>
+      // Toggle password visibility
+      document.getElementById('togglePasswordIcon').addEventListener('click', function() {
+        const passwordInput = document.getElementById('password');
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          this.classList.remove('fa-eye-slash');
+          this.classList.add('fa-eye');
+        } else {
+          passwordInput.type = 'password';
+          this.classList.remove('fa-eye');
+          this.classList.add('fa-eye-slash');
+        }
+      });
+    </script>
 
 </body>
-
 </html>

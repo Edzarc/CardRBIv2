@@ -63,32 +63,6 @@
           </div>
           <small>Use 8 or more characters.</small>
         </div>
-
-        <!-- Role -->
-        <!--
-        <div class="form-group">
-          <label for="role">Role</label>
-          <div class="input-wrapper">
-            <i class="fas fa-id-badge icon"></i>
-            <select id="role" name="role" required style="width:100%;padding:12px;border:1px solid var(--border-color);border-radius:8px;">
-              <option value="Loan Officer">Loan Officer</option>
-              <option value="Manager">Manager</option>
-              <option value="Admin">Admin</option>
-            </select>
-          </div>
-        </div>
-        -->
-
-        <!-- Branch -->
-        <!--
-        <div class="form-group">
-          <label for="branch">Branch</label>
-          <div class="input-wrapper">
-            <i class="fas fa-building icon"></i>
-            <input type="text" id="branch" name="branch" placeholder="Enter your branch" required>
-          </div>
-        </div>
-        -->
         
         <button type="submit" name="signup" class="btn-primary">Sign Up</button>
       </form>

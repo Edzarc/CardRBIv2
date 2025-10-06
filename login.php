@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (isset($_SESSION['first_name'])) {
+    if (isset($_SESSION['id'])) {
         header("Location: verifySection.php");
         exit;
     }
@@ -76,14 +76,6 @@
     </div>
 
     <script>
-        // Redirect to index.html after login
-        /*
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            window.location.href = 'verifySection.php';
-        });
-        */
-
       // Toggle password visibility
       document.getElementById('togglePasswordIcon').addEventListener('click', function() {
         const passwordInput = document.getElementById('password');

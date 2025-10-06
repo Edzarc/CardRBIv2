@@ -3,13 +3,19 @@
     include("header.php");
     require("PHP/database.php");
 
-    try {
-        $stmt = $pdo->prepare("SELECT payments.payment_date, payments.amount, payments.method FROM payments"); //CHANGE THIS LATER 'payment...'
-        $stmt->execute();
-        $payments = $stmt->fetchAll();
-    }
-    catch (PDOException $e) {
-        echo $e->getMessage();  //THIS TOO
+    $payments = null;
+
+    if(isset($_SESSION["id"])){
+        try {
+            $stmt = $pdo->prepare("SELECT p.payment_date, p.amount, p.method FROM payments p
+                                          JOIN loans l ON p.loan_id = l.loan_id WHERE l.member_id = ? 
+                                          ORDER BY p.payment_date DESC");
+            $stmt->execute([$_SESSION['id']]);
+            $payments = $stmt->fetchAll();
+        }
+        catch (PDOException $e) {
+            echo $e->getMessage();  //THIS TOO
+        }
     }
 ?>
 
@@ -30,23 +36,25 @@
 <body>
 
     <!-- Loan Payments -->
-    <div class="loan_historytb">
-      <h3>Loan Payments History</h3>
-      <table>
-        <tr><th>Date</th><th>Amount</th><th>Method</th></tr>
-        <?php if ($payments): ?>
-          <?php foreach ($payments as $p): ?>
-            <tr>
-              <td><?= htmlspecialchars($p['payment_date']) ?></td>
-              <td>₱<?= number_format($p['amount'],2) ?></td>
-              <td><?= htmlspecialchars($p['method']) ?></td>
-            </tr>
-          <?php endforeach; ?>
-        <?php else: ?>
-          <tr><td colspan="3">No payments yet.</td></tr>
-        <?php endif; ?>
-      </table>
-    </div>
+    <?php if (isset($_SESSION['role'])): ?>
+        <div class="loan_historytb">
+        <h3>Loan Payments History</h3>
+        <table>
+            <tr><th>Date</th><th>Amount</th><th>Method</th></tr>
+            <?php if ($payments): ?>
+            <?php foreach ($payments as $p): ?>
+                <tr>
+                <td><?= htmlspecialchars($p['payment_date']) ?></td>
+                <td>₱<?= number_format($p['amount'],2) ?></td>
+                <td><?= htmlspecialchars($p['method']) ?></td>
+                </tr>
+            <?php endforeach; ?>
+            <?php else: ?>
+            <tr><td colspan="3">No payments yet.</td></tr>
+            <?php endif; ?>
+        </table>
+        </div>
+    <?php endif; ?>
 
     <section class="action">
         <div>

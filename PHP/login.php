@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                 session_regenerate_id(true);
                 $_SESSION['first_name'] = $user['first_name'];
                 $_SESSION['last_name'] = $user['last_name'];
+                $_SESSION['id'] = $user['id'];
             
 
                 if ($user['role'] === 'admin') {

@@ -9,12 +9,12 @@
         try {
             $stmt = $pdo->prepare("SELECT p.payment_date, p.amount, p.method FROM payments p
                                           JOIN loans l ON p.loan_id = l.loan_id WHERE l.member_id = ? 
-                                          ORDER BY p.payment_date DESC");
+                                          ORDER BY p.payment_date DESC");//LIMIT 10??
             $stmt->execute([$_SESSION['id']]);
             $payments = $stmt->fetchAll();
         }
         catch (PDOException $e) {
-            echo $e->getMessage();  //THIS TOO
+            echo $e->getMessage();  //CHANGE THIS
         }
     }
 ?>
@@ -36,7 +36,7 @@
 <body>
 
     <!-- Loan Payments -->
-    <?php if (isset($_SESSION['role'])): ?>
+    <?php if (isset($_SESSION['id'])): ?>
         <div class="loan_historytb">
         <h3>Loan Payments History</h3>
         <table>
@@ -56,13 +56,17 @@
         </div>
     <?php endif; ?>
 
-    <section class="action">
-        <div>
-            <p>Upload a picture of your loan usage: </p><br>
-            <a href="login.php"><button class="upload">Loan Verification</button></a>
-        </div>
-    </section>
+    <!--PAYMENT-->
+    <?php if (isset($_SESSION['id'])): ?>
+        <section class="action">
+            <div>
+                <p>Make Payment: </p><br>
+                <a href="payLoan.php"><button class="upload">Pay Loan</button></a>
+            </div>
+        </section>
+    <?php endif; ?>
 
+    <!--ADMIN PAGE-->
     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
         <section class="action">
             <div>
@@ -71,6 +75,16 @@
             </div>
         </section>
     <?php endif; ?>
+    
+    <!--IMAGE PROOF OF LOAN-->
+    <section class="action">
+        <div>
+            <p>Upload An Image Proof Of Your Loan Usage: </p><br>
+            <a href="login.php"><button class="upload">Loan Verification</button></a>
+        </div>
+    </section>
+
+
     
 
     <!-- Hero Section -->
@@ -110,12 +124,6 @@
             <p><strong>CARD RBI</strong></p>
             <p>Address: P. Guevarra St., Corner Aguirre St., Brgy. Poblacion II, Sta. Cruz, Laguna</p>
             <p>Telephone Number: (049) 523-1047</p>
-            <p>0917-132-7589 (Globe – calls)</p>
-            <p>0999-880-4785 (Smart – calls)</p>
-            <p>0961-017-0677 (Smart – calls)</p>
-            <p>0938-744-6274 (Smart – text messages)</p>
-            <p>0969-285-4378 (Smart – Outgoing Calls)</p>
-            <p>0961-017-0676 (Smart – Outgoing Calls)</p>
             <p>Email: info@cardrbi.com</p>
         </div>
         <div class="social-icons">

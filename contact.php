@@ -21,7 +21,7 @@
         <p>0938-744-6274 (Smart – text messages)</p>
         <p>0969-285-4378 (Smart – Outgoing Calls)</p>
         <p>0961-017-0676 (Smart – Outgoing Calls)</p>
-        <p>Email: info@cardrbi.com</p>        
+        <p>Email: cmrbi.csr@cardmri.com</p>        
     </div>
     
 </body>

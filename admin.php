@@ -29,8 +29,8 @@
     <div class="adminPages">
         <ul>
             <li><a href="accountRegister.php">Register account</a></li>
-            <li><a href="">System Overview</a></li>
-            <li><a href="">...</a></li>
+            <li><a href="systemOverview.php">System Overview</a></li>
+            <li><a href="reports.php">Reports</a></li>
             <li><a href="">...</a></li>
         </ul>
     </div>

@@ -83,10 +83,7 @@
             <a href="login.php"><button class="upload">Loan Verification</button></a>
         </div>
     </section>
-
-
     
-
     <!-- Hero Section -->
     <section class="hero" id="about">
         <div class="hero-content">

@@ -1,0 +1,26 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Color Palette based on CARD RBI Logo */
+:root {
+    --primary-blue: #004D99; /* Deep, professional blue */
+    --primary-yellow: #FFD700; /* Vibrant yellow */
+    --secondary-blue: #006699; /* Slightly lighter blue for accents */
+    --light-blue-background: #F4F8FB; /* A soft, very light blue for the background */
+    --dark-text: #222; /* Darker text for readability */
+    --medium-text: #555; /* Medium text for paragraphs and labels */
+    --accent-yellow: #FFC94A; /* A slightly softer yellow accent */
+    --border-color: #E0E0E0; /* Light gray border */
+}
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background: var(--light-blue-background);
+    margin: 0;
+    color: var(--dark-text);
+}
+

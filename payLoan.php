@@ -2,7 +2,7 @@
     session_start();
     include("header.php");
     require("PHP/database.php");
-    if (!isset($_SESSION['id']) || $_SESSION['role'] != "admin") {
+    if (!isset($_SESSION['id'])) {
         header("Location: index.php");
         exit;
     }
@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="styles/index.css" />
 </head>
 <body>
-    
+    <div class="">
+
+    </div>
 </body>
 </html>
